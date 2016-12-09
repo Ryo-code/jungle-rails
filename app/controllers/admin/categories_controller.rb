@@ -1,6 +1,7 @@
 class Admin::CategoriesController < ApplicationController
 
   def index
+    puts flash[:test]
     @categories = Category.order(id: :desc).all
   end
 
@@ -18,8 +19,14 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @category = Category.find params[:id]
+    @category.destroy
+    redirect_to [:admin, :categories], flash: {test: 'Category deleted!'}
+  end
 
+
+  private
   def category_params
     params.require(:category).permit(
       :name
