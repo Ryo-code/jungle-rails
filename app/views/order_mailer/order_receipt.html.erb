@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+    <h1> ~~Order receipt~~ </h1>
+
+    <p>
+      Thank you, valued customer! We love you and appreciate your business. And remember, we're not a cult!
+      <br> <br>
+
+    </p>
+
+    <p>Here is a fancy list of your orders:</p>
+
+    <% (@order.line_items).each do |line_item| %>
+      <p>
+        -<%= line_item.product.name %> (Quantity: <%= line_item.quantity %>)
+      </p>
+      <p>
+        Price: <%= number_to_currency(line_item.total_price_cents / 100.0) %>
+      </p>
+
+    <% end %>
+
+    <p>
+      <strong> Total cost: </strong>
+      <%= number_to_currency(@order.total_cents / 100.0) %>
+    </p>
+
+    <br>
+    <p>
+      Thanks again for your business!
+    </p>
+
+    <p>
+      ...Seriously, we're not a cult!
+    </p>
+
+  </body>
+</html>
