@@ -21,6 +21,7 @@ end
 
 # Let's do this ...
 
+
 ## CATEGORIES
 
 puts "Finding or Creating Categories ..."
@@ -29,11 +30,12 @@ cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
 
+
 ## PRODUCTS
 
 puts "Re-creating Products ..."
 
-Product.destroy_all
+# Product.destroy_all
 
 cat1.products.create!({
   name:  'Men\'s Classy shirt',
@@ -132,5 +134,43 @@ cat3.products.create!({
   price: 2_483.75
 })
 
-
 puts "DONE!"
+
+
+## USER
+puts "Seeding users ..."
+
+user1 = User.create! name: 'Paul Fister', email: 'paul@yarp.com', password: 'fisterp123'
+user2 = User.create! name: 'Sally Sillison', email: 'sally@sillypants.com', password: 'sillysally'
+
+
+## REVIEWS
+puts "Seeding reviews ..."
+
+Review.destroy_all
+
+
+user1.reviews.create!({
+  product_id: 1,
+  description: 'Such a great purchase!',
+  rating: 5,
+})
+# NOTE: Alternative writing...
+# Review.create({
+#   user_id: user1.id,
+#   product_id: 1,
+#   description: 'such a great purchase',
+#   rating: 5
+# })
+
+user2.reviews.create!({
+  product_id: 1,
+  description: 'What a disappointment. Ugh...',
+  rating: 1,
+})
+
+user1.reviews.create!({
+  product_id: 2,
+  description: 'So-so!',
+  rating: 3,
+})
