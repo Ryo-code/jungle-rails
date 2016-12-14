@@ -11,8 +11,10 @@ class ReviewsController < ApplicationController
     redirect_to product_path(params[:product_id]) #redirect back to same page
   end
 
-  # def show
-  #   @review = Review.find params[:id]
-  # end
+  def destroy
+    @review = Review.find params[:id]
+    @review.destroy
+    redirect_to product_path(params[:product_id])
+  end
 
 end

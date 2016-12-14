@@ -75,7 +75,23 @@ main section.categories-show {
   }
 }
 
+span.rating{
+  color: red;
+  text-align: right;
+  font-size: 90%
+}
 
+span.reviewer{
+  color: rgb(208, 19, 19);
+  font-size: 120%;
+}
+
+form {
+  padding: 10px; display: inline-flex;
+  background-color: rgba(187, 33, 42, 0.26);
+  border-radius: 15px;
+  margin: 20px;
+}
 
 main section.products-show {
 

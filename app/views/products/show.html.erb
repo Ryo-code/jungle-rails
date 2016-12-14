@@ -28,8 +28,12 @@
 
     <div>
       <h2> Reviews </h2> <br>
-      <% @product.reviews.each do |review| %>
-        <p> <strong> <%= review.user.name %>:</strong> <%= review.description %> (<i>Rating: <%= review.rating %></i>) </p>
+      <% (@product.reviews.reverse).each do |review| %>
+        <p> <strong> <span class="reviewer"><%= review.user.name %>:</span></strong> <%= review.description %> <span class="rating"><i>Rating: </i><%= review.rating %> </span> </p>
+
+        <% if review.user.id === current_user.id %>
+          <td><%= link_to fa_icon('minus-square'), product_review_path(product_id: @product.id, id: review.id), class: 'btn btn-sm btn-danger button-box', method: :delete %></td>
+        <% end %>
         <br>
       <% end %>
       <br>
@@ -56,8 +60,8 @@
     <% if current_user %>
       <%= form_for [@product, @review] do |f| %>
         <h3>
-          Write your review here
-        <h3>
+          Submit review:
+        <h3><br>
         <%= f.text_area :description %>
         <br>Rating
         <%= f.select :rating, [1, 2, 3, 4, 5] %>
