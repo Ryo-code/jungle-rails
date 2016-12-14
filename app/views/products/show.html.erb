@@ -31,11 +31,39 @@
       <% @product.reviews.each do |review| %>
         <p> <strong> <%= review.user.name %>:</strong> <%= review.description %> (<i>Rating: <%= review.rating %></i>) </p>
         <br>
-
       <% end %>
+      <br>
 
+      <!-- <form style="background-color:orange">
+        <h3>Submit your own review</h3><br>
+        <textarea name="review-description" placeholder="Write your review here"></textarea>
+        <br><br><strong>Submit a rating:<strong>
+          <select name="rating">
+            <option value="one">One star</option>
+            <option value="two">Two stars</option>
+            <option value="three">Three stars</option>
+            <option value="four">Four stars</option>
+            <option value="five">Five stars</option>
+          </select>
+          <br><br>
+          <button type="submit">Submit</button>
+      </form> -->
     </div>
 
-  </article>
 
+
+    <!--  grab params in controller-->
+    <% if current_user %>
+      <%= form_for [@product, @review] do |f| %>
+        <h3>
+          Write your review here
+        <h3>
+        <%= f.text_area :description %>
+        <br>Rating
+        <%= f.select :rating, [1, 2, 3, 4, 5] %>
+        <%= f.submit "Submit" %>
+      <% end %>
+    <% end %>
+
+  </article>
 </section>
